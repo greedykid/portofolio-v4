@@ -38,6 +38,19 @@ const experiences = [
   { date: '2025: 2026', role: 'Pengembang Web & Peneliti', company: 'Platform E-Commerce “GEGARES”', body: 'Mengembangkan aplikasi e-commerce sebagai proyek Penulisan Ilmiah Universitas Gunadarma dengan arsitektur Laravel MVC dan database MySQL.' },
 ];
 
+const stackTools = [
+  'PHP',
+  'Laravel',
+  'MySQL',
+  'Tailwind CSS',
+  'JavaScript',
+  'Git & GitHub',
+  'Postman',
+  'Docker',
+  'Figma',
+  'Windows / Linux',
+];
+
 function Arrow() { return <span aria-hidden="true">↗</span>; }
 
 export default function Home() {
@@ -106,7 +119,7 @@ export default function Home() {
           </div>
         </section>
 
-        <div className="ticker" data-reveal="ticker" aria-label="Bidang keahlian"><div className="ticker-track"><div className="ticker-item">WEB DEVELOPMENT <b>/</b> SYSTEM DESIGN <b>/</b> IT SUPPORT <b>/</b> LET&apos;S BUILD SOMETHING USEFUL</div></div></div>
+        <div className="ticker" data-reveal="ticker" aria-label="Stack dan tools yang digunakan"><p className="sr-only">Stack dan tools yang digunakan: {stackTools.join(', ')}.</p><div className="ticker-track" aria-hidden="true">{[0, 1].map((copy) => <div className="ticker-group" key={copy}>{stackTools.map((tool) => <span className="ticker-item" key={`${copy}-${tool}`}><b>+</b>{tool}</span>)}</div>)}</div></div>
 
         <section className="section" id="about" data-reveal="section">
           <div className="container">

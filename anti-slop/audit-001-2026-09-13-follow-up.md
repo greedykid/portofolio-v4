@@ -28,7 +28,7 @@ Skill cards diberi offset/padding yang berbeda agar kategori tidak tampil sebaga
 - Mobile safety: menu button dan brand link memenuhi 44px minimum; ticker memakai wrapping pada breakpoint mobile.
 - Navigation: semua href section tetap menuju target yang ada.
 - Interactive behavior: mobile menu tetap memakai `menuOpen` dan `onClick`; link CV, email, map, live site, GitHub, dan LinkedIn memiliki destination nyata.
-- Motion behavior: IntersectionObserver menambahkan `is-visible` sekali saat elemen masuk viewport; hover feedback tetap tersedia; tidak ada keyframe loop atau animasi infinite.
+- Motion behavior: IntersectionObserver menambahkan `is-visible` sekali saat elemen masuk viewport; hover feedback tetap tersedia; carousel stack adalah satu loop yang disengaja, berhenti saat hover/focus, dan dinonaktifkan untuk reduced motion.
 
 ## Remaining note
 

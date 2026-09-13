@@ -15,7 +15,7 @@
 - Border tebal dan hard shadow: motif identitas utama sekaligus memberi batas yang jelas pada kartu, CTA, dan blok bukti.
 - Komposisi bervariasi: hero asimetris, about editorial, project grid, skill list, timeline, lalu contact block mengikuti cara recruiter memindai portfolio.
 - Tidak ada dark mode: brief visual menetapkan paper-and-ink light direction; satu tema menghindari mode kedua yang tidak dibutuhkan oleh portfolio statis ini.
-- Motion 2: reveal-on-scroll dan stagger ringan membantu pembaca mengikuti urutan section, sementara hover transition memberi feedback pada elemen yang bisa disentuh. Tidak ada motion loop tanpa kontrol agar konten tetap menjadi fokus.
+- Motion 2: reveal-on-scroll dan stagger ringan membantu pembaca mengikuti urutan section, hover transition memberi feedback pada elemen yang bisa disentuh, dan banner stack memakai satu carousel infinite untuk membuat tools mudah dipindai tepat di bawah hero. Carousel berhenti saat hover/focus dan menjadi statis untuk reduced motion.
 - Arrow hanya pada aksi keluar atau berpindah konteks: arah visual memberi sinyal saat membuka CV atau situs eksternal, bukan menjadi hiasan semua CTA.
 
 ## Content policy
