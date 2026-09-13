@@ -20,6 +20,7 @@
 - GitHub contribution chart: memakai data publik akun `greedykid` sebagai bukti aktivitas code; loading, error, dan fallback profile disediakan karena grafik berasal dari layanan eksternal.
 - Component grammar: mengikuti referensi neobrutalism.dev dengan border tegas, hard shadow yang terlihat, rounded kecil, warna `main` untuk aksi atau trigger, dan `secondary` untuk bidang konten. Hover menggeser komponen sampai bayangannya hilang sebagai umpan balik fisik.
 - Accordion: memakai primitive Radix dengan pola API shadcn agar keyboard navigation, state ARIA, dan animasi buka-tutup tetap ditangani dengan benar. Isinya menjawab kebutuhan recruiter atau calon client sebelum menghubungi, bukan filler FAQ.
+- Component mapping: Button dan Card menjadi grammar dasar CTA serta project/stat blocks; Badge dipakai untuk kategori project, tag teknologi, dan kelompok toolkit; Alert dipakai untuk loading/error GitHub; Calendar dipakai sebagai referensi visual contribution grid; Carousel/Marquee menjadi ticker stack; Image Card menjadi project preview; navigation, drawer, dialog, form, table, dan chart hanya dipakai bila ada kebutuhan interaksi nyata yang sesuai konten portfolio.
 
 ## Content policy
 
