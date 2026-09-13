@@ -29,6 +29,7 @@ Skill cards diberi offset/padding yang berbeda agar kategori tidak tampil sebaga
 - Navigation: semua href section tetap menuju target yang ada.
 - Interactive behavior: mobile menu tetap memakai `menuOpen` dan `onClick`; link CV, email, map, live site, GitHub, dan LinkedIn memiliki destination nyata.
 - Motion behavior: IntersectionObserver menambahkan `is-visible` sekali saat elemen masuk viewport; hover feedback tetap tersedia; carousel stack adalah satu loop yang disengaja, berhenti saat hover/focus, dan dinonaktifkan untuk reduced motion.
+- GitHub activity: contribution chart memakai data publik akun `greedykid`, dengan loading state dan fallback link saat layanan chart eksternal gagal.
 
 ## Remaining note
 

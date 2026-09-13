@@ -13,10 +13,11 @@
 - Brakle untuk heading dan Onest untuk body: Brakle memberi karakter display yang khas, sementara Onest menjaga paragraf dan label tetap terbaca.
 - Grid background: mengikat visual ke referensi Neo-Brutalism dan memberi ritme pada bidang kosong, bukan menjadi dekorasi pada setiap komponen.
 - Border tebal dan hard shadow: motif identitas utama sekaligus memberi batas yang jelas pada kartu, CTA, dan blok bukti.
-- Komposisi bervariasi: hero asimetris, about editorial, project grid, skill list, timeline, lalu contact block mengikuti cara recruiter memindai portfolio.
+- Komposisi bervariasi: hero asimetris, about editorial, project grid, GitHub activity proof, skill list, timeline, lalu contact block mengikuti cara recruiter memindai portfolio.
 - Tidak ada dark mode: brief visual menetapkan paper-and-ink light direction; satu tema menghindari mode kedua yang tidak dibutuhkan oleh portfolio statis ini.
 - Motion 2: reveal-on-scroll dan stagger ringan membantu pembaca mengikuti urutan section, hover transition memberi feedback pada elemen yang bisa disentuh, dan banner stack memakai satu carousel infinite untuk membuat tools mudah dipindai tepat di bawah hero. Carousel berhenti saat hover/focus dan menjadi statis untuk reduced motion.
 - Arrow hanya pada aksi keluar atau berpindah konteks: arah visual memberi sinyal saat membuka CV atau situs eksternal, bukan menjadi hiasan semua CTA.
+- GitHub contribution chart: memakai data publik akun `greedykid` sebagai bukti aktivitas code; loading, error, dan fallback profile disediakan karena grafik berasal dari layanan eksternal.
 
 ## Content policy
 

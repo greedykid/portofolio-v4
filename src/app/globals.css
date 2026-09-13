@@ -128,6 +128,20 @@ h2 { margin-bottom: 0; font-family: 'Brakle', sans-serif; font-size: clamp(40px,
 .project-links { display: flex; gap: 15px; margin-top: 22px; font-size: 13px; font-weight: 800; }
 .project-links a { text-decoration: underline; text-underline-offset: 4px; }
 
+.github-layout { display: grid; grid-template-columns: .65fr 1.35fr; align-items: center; gap: 28px; }
+.github-copy { max-width: 330px; font-size: 16px; line-height: 1.65; }
+.github-copy .button { margin-top: 10px; }
+.github-chart-shell { min-width: 0; padding: 22px; background: var(--yellow); }
+.github-chart-label { margin-bottom: 18px; font-size: 11px; font-weight: 800; letter-spacing: .1em; }
+.github-chart-frame { position: relative; min-height: 150px; display: flex; align-items: center; overflow-x: auto; border: var(--line); padding: 22px; background: var(--paper); }
+.github-chart { display: block; width: 100%; min-width: 610px; height: auto; transition: opacity .3s ease; }
+.chart-loading { position: absolute; inset: 0; z-index: 1; display: grid; place-items: center; margin: 0; background: var(--paper); font-size: 13px; font-weight: 700; }
+.github-chart-shell.is-loaded .chart-loading { opacity: 0; pointer-events: none; }
+.github-chart-shell.is-error .github-chart { display: none; }
+.github-chart-shell.is-error .chart-loading { display: none; }
+.chart-error { margin: 0; font-size: 13px; font-weight: 700; line-height: 1.5; }
+.chart-error a { text-decoration: underline; text-underline-offset: 3px; }
+
 .skills-grid { display: grid; grid-template-columns: repeat(4, 1fr); align-items: start; gap: 14px; }
 .skill-card { padding: 20px; min-height: 240px; }
 .skill-card:nth-child(1) { background: var(--pink); }
@@ -188,6 +202,8 @@ h2 { margin-bottom: 0; font-family: 'Brakle', sans-serif; font-size: clamp(40px,
   .section-intro { max-width: 600px; }
   .contact-box { grid-template-columns: 1fr; }
   .contact-actions { justify-self: start; width: min(100%, 360px); }
+  .github-layout { grid-template-columns: 1fr; }
+  .github-copy { max-width: 600px; }
 }
 @media (max-width: 640px) {
   .container { width: min(100% - 28px, 1180px); }
@@ -204,6 +220,8 @@ h2 { margin-bottom: 0; font-family: 'Brakle', sans-serif; font-size: clamp(40px,
   .section { padding: 74px 0; }
   .about-copy { font-size: 16px; }
   .project-content h3 { font-size: 24px; }
+  .github-chart-shell { padding: 16px; }
+  .github-chart-frame { padding: 12px; }
   .timeline-meta { flex-direction: column; gap: 4px; }
   .contact-box { padding: 25px 20px; }
   .footer-inner { align-items: start; flex-direction: column; justify-content: center; padding: 24px 0; }
