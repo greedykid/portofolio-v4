@@ -46,9 +46,9 @@ a:focus-visible, button:focus-visible {
   box-shadow: 0 0 0 8px var(--paper);
 }
 
-.site-shell { min-height: 100vh; overflow: hidden; background-color: var(--paper); background-image: linear-gradient(rgba(21,21,21,.09) 1px, transparent 1px), linear-gradient(90deg, rgba(21,21,21,.09) 1px, transparent 1px); background-size: 38px 38px; }
+.site-shell { min-height: 100vh; overflow-x: clip; background-color: var(--paper); background-image: linear-gradient(rgba(21,21,21,.09) 1px, transparent 1px), linear-gradient(90deg, rgba(21,21,21,.09) 1px, transparent 1px); background-size: 38px 38px; }
 .container { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
-.topbar { position: sticky; top: 0; z-index: 20; border-bottom: var(--line); background: rgba(255,253,245,.96); box-shadow: 0 3px 0 rgba(21,21,21,.08); backdrop-filter: blur(12px); }
+.topbar { position: -webkit-sticky; position: sticky; top: 0; z-index: 50; border-bottom: var(--line); background: rgba(255,253,245,.96); box-shadow: 0 3px 0 rgba(21,21,21,.08); backdrop-filter: blur(12px); }
 .topbar-inner { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
 .brand { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; font-family: 'Brakle', sans-serif; font-size: 22px; }
 .brand-mark { display: grid; place-items: center; width: 38px; height: 38px; border: 2px solid var(--ink); background: var(--yellow); box-shadow: 4px 4px 0 var(--ink); transform: rotate(-4deg); transition: transform .25s ease, box-shadow .25s ease; }
