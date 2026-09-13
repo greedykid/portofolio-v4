@@ -61,6 +61,27 @@ function formatContributionDate(date: string) {
   return new Intl.DateTimeFormat('id-ID', { dateStyle: 'full' }).format(new Date(`${date}T00:00:00`));
 }
 
+function dateKey(date: Date) {
+  return [date.getFullYear(), String(date.getMonth() + 1).padStart(2, '0'), String(date.getDate()).padStart(2, '0')].join('-');
+}
+
+function buildContributionWeeks(contributions: Contribution[]) {
+  if (!contributions.length) return [] as (Contribution | null)[][];
+
+  const leadingEmptyDays = new Date(`${contributions[0].date}T00:00:00`).getDay();
+  const cells: (Contribution | null)[] = [
+    ...Array.from({ length: leadingEmptyDays }, () => null),
+    ...contributions,
+  ];
+  const weeks: (Contribution | null)[][] = [];
+
+  for (let index = 0; index < cells.length; index += 7) {
+    weeks.push(cells.slice(index, index + 7));
+  }
+
+  return weeks;
+}
+
 function Arrow() { return <span aria-hidden="true">↗</span>; }
 
 export default function Home() {
@@ -106,8 +127,18 @@ export default function Home() {
         if (!response.ok) throw new Error('GitHub contribution request failed');
         const payload = (await response.json()) as { contributions?: Contribution[] };
         if (!payload.contributions?.length) throw new Error('No GitHub contributions found');
-        setGithubContributions(payload.contributions);
-        setSelectedContribution(payload.contributions[payload.contributions.length - 1]);
+        const endDate = new Date();
+        const startDate = new Date(endDate);
+        startDate.setDate(startDate.getDate() - 364);
+        const startKey = dateKey(startDate);
+        const endKey = dateKey(endDate);
+        const rollingContributions = payload.contributions
+          .filter((contribution) => contribution.date >= startKey && contribution.date <= endKey)
+          .sort((a, b) => a.date.localeCompare(b.date));
+
+        if (!rollingContributions.length) throw new Error('No rolling GitHub contributions found');
+        setGithubContributions(rollingContributions);
+        setSelectedContribution(rollingContributions[rollingContributions.length - 1]);
       })
       .catch((error: unknown) => {
         if (error instanceof DOMException && error.name === 'AbortError') return;
@@ -117,6 +148,19 @@ export default function Home() {
 
     return () => controller.abort();
   }, []);
+
+  const contributionWeeks = buildContributionWeeks(githubContributions);
+  const monthFormatter = new Intl.DateTimeFormat('id-ID', { month: 'short' });
+  const monthMarkers = contributionWeeks.map((week, weekIndex) => {
+    const firstContribution = week.find((contribution): contribution is Contribution => contribution !== null);
+    const previousContribution = contributionWeeks[weekIndex - 1]?.find((contribution): contribution is Contribution => contribution !== null);
+
+    if (!firstContribution || (previousContribution && new Date(`${previousContribution.date}T00:00:00`).getMonth() === new Date(`${firstContribution.date}T00:00:00`).getMonth())) {
+      return null;
+    }
+
+    return { weekIndex, label: monthFormatter.format(new Date(`${firstContribution.date}T00:00:00`)) };
+  });
 
   return (
     <div className="site-shell">
@@ -170,7 +214,7 @@ export default function Home() {
 
         <section className="section" id="work" data-reveal="section"><div className="container"><div className="section-heading"><div><p className="section-kicker">02 / Selected work</p><h2>Yang sudah<br /><em>dibangun.</em></h2></div><p className="section-intro">Dua proyek yang menggabungkan analisis kebutuhan, implementasi, dan perhatian pada detail kecil.</p></div><div className="project-grid">{projects.map((project) => <article className="card project-card" data-reveal="card" key={project.title}><div className="project-image"><Image src={project.image} alt={`Screenshot ${project.title}`} fill sizes="(max-width: 640px) 100vw, 50vw" /><span className="project-index">{project.number}</span></div><div className="project-content"><span className="project-category">{project.category}</span><h3>{project.title}</h3><p>{project.description}</p><div className="tags">{project.tags.map((tag) => <span className="tag" key={tag}>{tag}</span>)}</div><div className="project-links"><a href={project.demo} target="_blank" rel="noreferrer">Live site <Arrow /></a><a href={project.github} target="_blank" rel="noreferrer">GitHub <Arrow /></a></div></div></article>)}</div></div></section>
 
-        <section className="section github-section" id="github" data-reveal="section"><div className="container"><div className="section-heading"><div><p className="section-kicker">03 / Open source activity</p><h2>Kode yang<br /><em>terus bergerak.</em></h2></div><p className="section-intro">Aktivitas kontribusi publik saya di GitHub, diperbarui mengikuti kalender kontribusi akun.</p></div><div className="github-layout"><div className="github-copy" data-reveal="content"><p>Selain mengerjakan project, saya menggunakan GitHub untuk menyimpan, merawat, dan membagikan proses pengembangan.</p><a className="button" href="https://github.com/greedykid" target="_blank" rel="noreferrer">Buka profil GitHub <Arrow /></a></div><div className={`card github-chart-shell ${githubChartLoading ? 'is-loading' : ''} ${githubChartError ? 'is-error' : ''}`} data-reveal="content"><p className="github-chart-label">PUBLIC CONTRIBUTIONS / GREEDYKID</p>{githubChartLoading && <p className="chart-loading" aria-live="polite">Memuat aktivitas publik GitHub...</p>}{!githubChartLoading && !githubChartError && <><div className="github-grid" role="group" aria-label="Kalender kontribusi publik GitHub">{githubContributions.map((contribution) => <button className={`github-cell level-${contribution.level}`} type="button" key={contribution.date} aria-label={`${formatContributionDate(contribution.date)}, ${contribution.count} kontribusi`} aria-pressed={selectedContribution?.date === contribution.date} onClick={() => setSelectedContribution(contribution)} title={`${formatContributionDate(contribution.date)}: ${contribution.count} kontribusi`} />)}</div><div className="github-detail" aria-live="polite">{selectedContribution ? <><strong>{selectedContribution.count} kontribusi</strong> pada {formatContributionDate(selectedContribution.date)}.</> : 'Ketuk salah satu kotak untuk melihat detail kontribusi.'}</div><p className="github-grid-hint">Ketuk kotak mana pun untuk melihat tanggal dan jumlah kontribusi.</p></>}{githubChartError && <p className="chart-error" role="status">Data kontribusi sedang tidak tersedia. <a href="https://github.com/greedykid" target="_blank" rel="noreferrer">Lihat aktivitas langsung di GitHub.</a></p>}</div></div></div></section>
+        <section className="section github-section" id="github" data-reveal="section"><div className="container"><div className="section-heading"><div><p className="section-kicker">03 / Open source activity</p><h2>Kode yang<br /><em>terus bergerak.</em></h2></div><p className="section-intro">Aktivitas kontribusi publik saya di GitHub, diperbarui mengikuti kalender kontribusi akun.</p></div><div className="github-layout"><div className="github-copy" data-reveal="content"><p>Selain mengerjakan project, saya menggunakan GitHub untuk menyimpan, merawat, dan membagikan proses pengembangan.</p><a className="button" href="https://github.com/greedykid" target="_blank" rel="noreferrer">Buka profil GitHub <Arrow /></a></div><div className={`card github-chart-shell ${githubChartLoading ? 'is-loading' : ''} ${githubChartError ? 'is-error' : ''}`} data-reveal="content"><p className="github-chart-label">PUBLIC CONTRIBUTIONS / GREEDYKID</p>{githubChartLoading && <p className="chart-loading" aria-live="polite">Memuat aktivitas publik GitHub...</p>}{!githubChartLoading && !githubChartError && <><div className="github-calendar-scroll"><div className="github-calendar"><div className="github-months" aria-hidden="true" style={{ gridTemplateColumns: `repeat(${contributionWeeks.length}, 14px)` }}>{monthMarkers.map((marker) => marker && <span key={marker.weekIndex} style={{ gridColumn: marker.weekIndex + 1 }}>{marker.label}</span>)}</div><div className="github-day-labels" aria-hidden="true"><span /><span>Sen</span><span /><span>Rab</span><span /><span>Jum</span><span /></div><div className="github-grid" role="group" aria-label="Kalender kontribusi publik GitHub">{contributionWeeks.map((week, weekIndex) => <div className="github-week" key={`week-${weekIndex}`}>{Array.from({ length: 7 }, (_, dayIndex) => { const contribution = week[dayIndex] ?? null; return contribution ? <button className={`github-cell level-${contribution.level}`} type="button" key={contribution.date} aria-label={`${formatContributionDate(contribution.date)}, ${contribution.count} kontribusi`} aria-pressed={selectedContribution?.date === contribution.date} onClick={() => setSelectedContribution(contribution)} title={`${formatContributionDate(contribution.date)}: ${contribution.count} kontribusi`} /> : <span className="github-cell github-cell-empty" aria-hidden="true" key={`empty-${weekIndex}-${dayIndex}`} />; })}</div>)}</div></div></div><div className="github-detail" aria-live="polite">{selectedContribution ? <><strong>{selectedContribution.count} kontribusi</strong> pada {formatContributionDate(selectedContribution.date)}.</> : 'Ketuk salah satu kotak untuk melihat detail kontribusi.'}</div><p className="github-grid-hint">Rentang 1 tahun sampai hari ini. Ketuk kotak untuk melihat tanggal dan jumlah kontribusi.</p></>}{githubChartError && <p className="chart-error" role="status">Data kontribusi sedang tidak tersedia. <a href="https://github.com/greedykid" target="_blank" rel="noreferrer">Lihat aktivitas langsung di GitHub.</a></p>}</div></div></div></section>
 
         <section className="section" id="skills" data-reveal="section"><div className="container"><div className="section-heading"><div><p className="section-kicker">04 / My toolkit</p><h2>Alat untuk<br /><em>beresin masalah.</em></h2></div></div><div className="skills-grid">{skillGroups.map((group) => <article className={`card skill-card ${group.color}`} data-reveal="card" key={group.title}><h3>{group.title}</h3><ul>{group.skills.map((skill) => <li key={skill}>{skill}</li>)}</ul></article>)}</div></div></section>
 
