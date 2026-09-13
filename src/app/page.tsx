@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 const projects = [
   {
@@ -36,6 +37,13 @@ const skillGroups = [
 const experiences = [
   { date: '2026: SEKARANG', role: 'Pengembang Web', company: 'Website Katalog Digital “Berkah Mulia”', body: 'Membangun dan mendeploy katalog digital aktif, merancang kategori bertingkat, serta menjaga performa dan responsivitas di berbagai perangkat.' },
   { date: '2025: 2026', role: 'Pengembang Web & Peneliti', company: 'Platform E-Commerce “GEGARES”', body: 'Mengembangkan aplikasi e-commerce sebagai proyek Penulisan Ilmiah Universitas Gunadarma dengan arsitektur Laravel MVC dan database MySQL.' },
+];
+
+const faqItems = [
+  { question: 'Apa yang biasanya saya kerjakan?', answer: 'Saya mengembangkan website dan sistem berbasis Laravel, MySQL, dan Tailwind CSS. Saya juga membantu troubleshooting hardware/software, instalasi sistem operasi, serta konektivitas dasar LAN dan Wi-Fi.' },
+  { question: 'Bagaimana cara memulai kolaborasi?', answer: 'Kirim email dengan konteks singkat tentang kebutuhan, target, dan tenggat waktu. Dari sana kita bisa menyamakan ruang lingkup dan menentukan langkah teknis yang paling masuk akal.' },
+  { question: 'Apakah ada proyek yang bisa langsung dilihat?', answer: 'Ada. GEGARES dan Berkah Mulia tersedia sebagai live site di bagian Karya, lengkap dengan tautan untuk melihat implementasi dan repositori yang terkait.' },
+  { question: 'Apa yang dibagikan di GitHub?', answer: 'Bagian GitHub menampilkan aktivitas kontribusi publik akun greedykid dalam rentang satu tahun berjalan. Kotak pada kalender dapat dipilih untuk melihat tanggal dan jumlah kontribusinya.' },
 ];
 
 const stackTools = [
@@ -292,7 +300,9 @@ export default function Home() {
 
         <section className="section" id="experience" data-reveal="section"><div className="container"><div className="section-heading"><div><p className="section-kicker">05 / Experience</p><h2>Perjalanan<br /><em>sejauh ini.</em></h2></div></div><div className="timeline">{experiences.map((experience) => <div className="timeline-item" data-reveal="card" key={experience.company}><span className="timeline-dot" /><article className="card timeline-card"><div className="timeline-meta"><span>{experience.date}</span><span>JAKARTA, ID</span></div><h3>{experience.role}</h3><p>{experience.company}</p><ul><li>{experience.body}</li><li>Kolaborasi, dokumentasi sistem, dan pengembangan antarmuka responsif.</li></ul></article></div>)}</div></div></section>
 
-        <section className="section contact" id="contact" data-reveal="section"><div className="container"><div className="contact-box" data-reveal="content"><div><p className="section-kicker">06 / Mari ngobrol</p><h2>Punya ide?<br />Saya siap <em>mendengar.</em></h2><p className="contact-copy">Sedang mencari web developer, IT support, atau sekadar ingin bertukar cerita soal sistem? Kirim pesan. Saya akan membalas secepatnya.</p></div><div className="contact-actions"><a className="button" href="mailto:rizkiarbi65@gmail.com">Email saya <Arrow /></a><a className="button" href="https://linkedin.com/in/rizkiarbiansyah" target="_blank" rel="noreferrer">LinkedIn <Arrow /></a><a className="button" href="https://github.com/greedykid" target="_blank" rel="noreferrer">GitHub <Arrow /></a></div></div></div></section>
+        <section className="section faq-section" id="faq" data-reveal="section"><div className="container"><div className="section-heading"><div><p className="section-kicker">06 / Sebelum mulai</p><h2>Yang sering<br /><em>ditanyakan.</em></h2></div><p className="section-intro">Jawaban singkat tentang fokus kerja, cara memulai, dan bukti yang bisa langsung diperiksa.</p></div><div className="faq-layout"><div className="faq-stamp" aria-hidden="true">READ<br />THIS<br />FIRST.</div><Accordion type="single" collapsible className="faq-accordion">{faqItems.map((item, index) => <AccordionItem value={`faq-${index + 1}`} key={item.question}><AccordionTrigger>{item.question}</AccordionTrigger><AccordionContent>{item.answer}</AccordionContent></AccordionItem>)}</Accordion></div></div></section>
+
+        <section className="section contact" id="contact" data-reveal="section"><div className="container"><div className="contact-box" data-reveal="content"><div><p className="section-kicker">07 / Mari ngobrol</p><h2>Punya ide?<br />Saya siap <em>mendengar.</em></h2><p className="contact-copy">Sedang mencari web developer, IT support, atau sekadar ingin bertukar cerita soal sistem? Kirim pesan. Saya akan membalas secepatnya.</p></div><div className="contact-actions"><a className="button" href="mailto:rizkiarbi65@gmail.com">Email saya <Arrow /></a><a className="button" href="https://linkedin.com/in/rizkiarbiansyah" target="_blank" rel="noreferrer">LinkedIn <Arrow /></a><a className="button" href="https://github.com/greedykid" target="_blank" rel="noreferrer">GitHub <Arrow /></a></div></div></div></section>
       </main>
 
       <footer className="footer"><div className="container footer-inner"><span>© 2026 Rizki Arbiansyah. Dibuat dengan niat baik.</span><div className="footer-links"><a href="https://github.com/greedykid" target="_blank" rel="noreferrer">GitHub</a><a href="https://instagram.com/rizkiarbi_" target="_blank" rel="noreferrer">Instagram</a><a href="mailto:rizkiarbi65@gmail.com">Email</a></div></div></footer>

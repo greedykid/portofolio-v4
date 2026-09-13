@@ -18,6 +18,8 @@
 - Motion 2: reveal-on-scroll dan stagger ringan membantu pembaca mengikuti urutan section, hover transition memberi feedback pada elemen yang bisa disentuh, dan banner stack memakai satu carousel infinite untuk membuat tools mudah dipindai tepat di bawah hero. Carousel berhenti saat hover/focus dan menjadi statis untuk reduced motion.
 - Arrow hanya pada aksi keluar atau berpindah konteks: arah visual memberi sinyal saat membuka CV atau situs eksternal, bukan menjadi hiasan semua CTA.
 - GitHub contribution chart: memakai data publik akun `greedykid` sebagai bukti aktivitas code; loading, error, dan fallback profile disediakan karena grafik berasal dari layanan eksternal.
+- Component grammar: mengikuti referensi neobrutalism.dev dengan border tegas, hard shadow yang terlihat, rounded kecil, warna `main` untuk aksi atau trigger, dan `secondary` untuk bidang konten. Hover menggeser komponen sampai bayangannya hilang sebagai umpan balik fisik.
+- Accordion: memakai primitive Radix dengan pola API shadcn agar keyboard navigation, state ARIA, dan animasi buka-tutup tetap ditangani dengan benar. Isinya menjawab kebutuhan recruiter atau calon client sebelum menghubungi, bukan filler FAQ.
 
 ## Content policy
 
