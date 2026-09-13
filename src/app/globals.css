@@ -48,7 +48,7 @@ a:focus-visible, button:focus-visible {
 
 .site-shell { min-height: 100vh; overflow: hidden; background-color: var(--paper); background-image: linear-gradient(rgba(21,21,21,.09) 1px, transparent 1px), linear-gradient(90deg, rgba(21,21,21,.09) 1px, transparent 1px); background-size: 38px 38px; }
 .container { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
-.topbar { position: sticky; top: 0; z-index: 20; border-bottom: var(--line); background: rgba(255,253,245,.94); backdrop-filter: blur(12px); }
+.topbar { position: sticky; top: 0; z-index: 20; border-bottom: var(--line); background: rgba(255,253,245,.96); box-shadow: 0 3px 0 rgba(21,21,21,.08); backdrop-filter: blur(12px); }
 .topbar-inner { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
 .brand { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; font-family: 'Brakle', sans-serif; font-size: 22px; }
 .brand-mark { display: grid; place-items: center; width: 38px; height: 38px; border: 2px solid var(--ink); background: var(--yellow); box-shadow: 4px 4px 0 var(--ink); transform: rotate(-4deg); transition: transform .25s ease, box-shadow .25s ease; }
@@ -57,8 +57,14 @@ a:focus-visible, button:focus-visible {
 .nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 10px 12px; border: 2px solid transparent; }
 .nav a { transition: transform .2s ease, border-color .2s ease, background-color .2s ease; }
 .nav a:hover { transform: translateY(-3px); border-color: var(--ink); background: var(--pink); }
-.menu-button { display: none; min-width: 60px; min-height: 44px; border: var(--line); background: var(--yellow); padding: 9px 12px; font-weight: 800; box-shadow: 3px 3px 0 var(--ink); cursor: pointer; }
+.menu-button { display: none; min-width: 60px; min-height: 44px; align-items: center; justify-content: center; gap: 8px; border: var(--line); background: var(--yellow); padding: 9px 12px; font-weight: 800; box-shadow: 3px 3px 0 var(--ink); cursor: pointer; transition: transform .25s ease, background-color .25s ease, box-shadow .25s ease; }
+.menu-button.is-open { background: var(--pink); transform: rotate(-2deg); }
 .menu-button:active { transform: translate(3px, 3px); box-shadow: none; }
+.menu-icon { display: grid; gap: 3px; width: 15px; }
+.menu-icon i { display: block; height: 2px; background: var(--ink); transform-origin: center; transition: transform .25s ease, opacity .2s ease; }
+.menu-button.is-open .menu-icon i:nth-child(1) { transform: translateY(5px) rotate(45deg); }
+.menu-button.is-open .menu-icon i:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.menu-button.is-open .menu-icon i:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
 
 .hero { padding: 86px 0 62px; }
 .hero-grid { display: grid; grid-template-columns: 1.08fr .92fr; align-items: center; gap: 70px; }
@@ -208,10 +214,10 @@ h2 { margin-bottom: 0; font-family: 'Brakle', sans-serif; font-size: clamp(40px,
 @media (max-width: 640px) {
   .container { width: min(100% - 28px, 1180px); }
   .topbar-inner { min-height: 68px; }
-  .nav { display: none; position: absolute; top: 68px; left: 0; right: 0; padding: 14px; border-bottom: var(--line); background: var(--paper); flex-direction: column; align-items: stretch; }
-  .nav.open { display: flex; }
+  .nav { display: flex; position: absolute; top: 68px; left: 0; right: 0; padding: 14px; border-bottom: var(--line); background: var(--paper); flex-direction: column; align-items: stretch; opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-12px); transform-origin: top center; transition: opacity .25s ease, visibility .25s ease, transform .25s cubic-bezier(.22, 1, .36, 1); }
+  .nav.open { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0); }
   .nav a { padding: 12px 10px; border-bottom: 2px solid rgba(21,21,21,.2); }
-  .menu-button { display: block; }
+  .menu-button { display: inline-flex; }
   h1 { font-size: clamp(50px, 16vw, 76px); }
   .hero-copy { font-size: 16px; }
   .ticker-item { gap: 9px; min-height: 48px; padding: 10px 13px; font-size: 14px; }

@@ -91,14 +91,14 @@ export default function Home() {
       <header className="topbar">
         <div className="container topbar-inner">
           <a className="brand" href="#top" onClick={() => setMenuOpen(false)}><span className="brand-mark">R</span><span>RIZKI ARBI.</span></a>
-          <nav className={`nav ${menuOpen ? 'open' : ''}`} aria-label="Navigasi utama">
+          <nav id="mobile-navigation" className={`nav ${menuOpen ? 'open' : ''}`} aria-label="Navigasi utama">
             <a href="#about" onClick={() => setMenuOpen(false)}>Tentang</a>
             <a href="#work" onClick={() => setMenuOpen(false)}>Karya</a>
             <a href="#github" onClick={() => setMenuOpen(false)}>GitHub</a>
             <a href="#skills" onClick={() => setMenuOpen(false)}>Keahlian</a>
             <a href="#contact" onClick={() => setMenuOpen(false)}>Kontak</a>
           </nav>
-          <button className="menu-button" type="button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen}>{menuOpen ? 'TUTUP' : 'MENU'}</button>
+          <button className={`menu-button ${menuOpen ? 'is-open' : ''}`} type="button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-controls="mobile-navigation"><span className="menu-icon" aria-hidden="true"><i /><i /><i /></span><span>{menuOpen ? 'TUTUP' : 'MENU'}</span></button>
         </div>
       </header>
 
