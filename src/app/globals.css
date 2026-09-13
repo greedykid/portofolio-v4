@@ -78,9 +78,17 @@ h1 span { display: inline-block; border-radius: var(--radius-sm); background: va
 h1 span:hover { transform: rotate(1deg) translateY(-3px); }
 .hero-copy { max-width: 600px; font-size: 18px; line-height: 1.65; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
-.button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; border: var(--line); border-radius: var(--radius-sm); padding: 13px 18px; background: var(--ink); color: var(--paper); box-shadow: var(--shadow); font-size: 14px; font-weight: 800; cursor: pointer; transition: transform .18s var(--ease-smooth), box-shadow .18s var(--ease-smooth), background-color .18s var(--ease-smooth), color .18s var(--ease-smooth); }
-.button:hover { transform: translate(4px, 4px); box-shadow: none; }
-.button.secondary { background: var(--paper); color: var(--ink); }
+.neo-button { display: inline-flex; min-height: 40px; align-items: center; justify-content: center; gap: 8px; border: 2px solid var(--ink); border-radius: var(--radius-sm); padding: 8px 16px; color: var(--ink); font-size: 14px; font-weight: 700; line-height: 1; white-space: nowrap; cursor: pointer; transition: all .15s cubic-bezier(.4, 0, .2, 1); will-change: transform, box-shadow; }
+.neo-button-default { background: var(--yellow); box-shadow: var(--shadow); }
+.neo-button-neutral { background: var(--paper); box-shadow: var(--shadow); }
+.neo-button-no-shadow { background: var(--yellow); }
+.neo-button-reverse { background: var(--yellow); }
+.neo-button:hover { transform: translate(4px, 4px); box-shadow: none; }
+.neo-button-reverse:hover { transform: translate(-4px, -4px); box-shadow: var(--shadow); }
+.neo-button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; box-shadow: 0 0 0 4px var(--paper); }
+.neo-button-size-sm { min-height: 36px; padding: 8px 12px; }
+.neo-button-size-lg { min-height: 44px; padding: 8px 32px; }
+.neo-button-size-icon { width: 40px; min-height: 40px; padding: 0; }
 .hero-note { margin: 27px 0 0; font-size: 13px; font-weight: 700; }
 .hero-note a { text-decoration: underline; text-underline-offset: 3px; }
 .hero-card { position: relative; padding: 22px; border: var(--line); border-radius: var(--radius-md); background: var(--blue); box-shadow: 11px 11px 0 var(--ink); transform: rotate(2deg); transition: transform .28s var(--ease-smooth), box-shadow .28s var(--ease-smooth); }
@@ -143,7 +151,7 @@ h2 { margin-bottom: 0; font-family: 'Brakle', sans-serif; font-size: clamp(40px,
 
 .github-layout { display: grid; grid-template-columns: .65fr 1.35fr; align-items: center; gap: 28px; }
 .github-copy { max-width: 330px; font-size: 16px; line-height: 1.65; }
-.github-copy .button { margin-top: 10px; }
+.github-copy .neo-button { margin-top: 10px; }
 .github-chart-shell { min-width: 0; padding: 22px; background: var(--yellow); }
 .github-chart-label { margin-bottom: 18px; font-size: 11px; font-weight: 800; letter-spacing: .1em; }
 .github-calendar-scroll { overflow-x: auto; border: var(--line); border-radius: var(--radius-sm); padding: 20px; background: var(--paper); }
@@ -224,8 +232,6 @@ h2 { margin-bottom: 0; font-family: 'Brakle', sans-serif; font-size: clamp(40px,
 .contact-box h2 { max-width: 600px; }
 .contact-copy { margin-top: 22px; max-width: 510px; font-size: 16px; line-height: 1.65; }
 .contact-actions { align-self: center; justify-self: end; display: grid; gap: 12px; width: min(100%, 280px); }
-.contact-actions .button { background: var(--paper); color: var(--ink); }
-.contact-actions .button:last-child { background: var(--ink); color: var(--paper); }
 .footer { border-top: var(--line); background: var(--ink); color: var(--paper); }
 .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 20px; min-height: 90px; font-size: 12px; font-weight: 700; }
 .footer-links { display: flex; gap: 18px; }
