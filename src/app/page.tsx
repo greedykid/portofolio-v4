@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const projects = [
   {
@@ -85,11 +85,81 @@ function buildContributionWeeks(contributions: Contribution[]) {
 function Arrow() { return <span aria-hidden="true">↗</span>; }
 
 export default function Home() {
+  const cursorDotRef = useRef<HTMLDivElement>(null);
+  const cursorRingRef = useRef<HTMLDivElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [githubContributions, setGithubContributions] = useState<Contribution[]>([]);
   const [githubChartLoading, setGithubChartLoading] = useState(true);
   const [githubChartError, setGithubChartError] = useState(false);
   const [selectedContribution, setSelectedContribution] = useState<Contribution | null>(null);
+
+  useEffect(() => {
+    const finePointerQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (!finePointerQuery.matches || reducedMotionQuery.matches) return;
+
+    const dot = cursorDotRef.current;
+    const ring = cursorRingRef.current;
+    if (!dot || !ring) return;
+
+    const root = document.documentElement;
+    let pointerX = -100;
+    let pointerY = -100;
+    let ringX = pointerX;
+    let ringY = pointerY;
+    let frame = 0;
+
+    const renderCursor = () => {
+      ringX += (pointerX - ringX) * 0.18;
+      ringY += (pointerY - ringY) * 0.18;
+      dot.style.transform = `translate3d(${pointerX}px, ${pointerY}px, 0) translate(-50%, -50%)`;
+      ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+
+      if (Math.abs(pointerX - ringX) > 0.1 || Math.abs(pointerY - ringY) > 0.1) {
+        frame = window.requestAnimationFrame(renderCursor);
+      } else {
+        frame = 0;
+      }
+    };
+
+    const moveCursor = (event: PointerEvent) => {
+      pointerX = event.clientX;
+      pointerY = event.clientY;
+      root.classList.add('cursor-visible');
+      if (!frame) frame = window.requestAnimationFrame(renderCursor);
+    };
+
+    const setHoverState = (event: PointerEvent) => {
+      const target = event.type === 'pointerout' ? event.relatedTarget : event.target;
+      const interactive = target instanceof Element && target.closest('a, button, [role="button"]');
+      ring.classList.toggle('is-hovering', Boolean(interactive));
+    };
+
+    const hideCursor = () => root.classList.remove('cursor-visible');
+    const pressCursor = () => root.classList.add('cursor-pressed');
+    const releaseCursor = () => root.classList.remove('cursor-pressed');
+
+    window.addEventListener('pointermove', moveCursor, { passive: true });
+    window.addEventListener('pointerover', setHoverState, { passive: true });
+    window.addEventListener('pointerout', setHoverState, { passive: true });
+    window.addEventListener('pointerdown', pressCursor, { passive: true });
+    window.addEventListener('pointerup', releaseCursor, { passive: true });
+    window.addEventListener('pointercancel', releaseCursor, { passive: true });
+    document.documentElement.addEventListener('mouseleave', hideCursor);
+
+    return () => {
+      window.removeEventListener('pointermove', moveCursor);
+      window.removeEventListener('pointerover', setHoverState);
+      window.removeEventListener('pointerout', setHoverState);
+      window.removeEventListener('pointerdown', pressCursor);
+      window.removeEventListener('pointerup', releaseCursor);
+      window.removeEventListener('pointercancel', releaseCursor);
+      document.documentElement.removeEventListener('mouseleave', hideCursor);
+      if (frame) window.cancelAnimationFrame(frame);
+      root.classList.remove('cursor-visible', 'cursor-pressed');
+      ring.classList.remove('is-hovering');
+    };
+  }, []);
 
   useEffect(() => {
     const shell = document.querySelector<HTMLElement>('.site-shell');
@@ -164,6 +234,8 @@ export default function Home() {
 
   return (
     <div className="site-shell">
+      <div className="cursor-dot" ref={cursorDotRef} aria-hidden="true" />
+      <div className="cursor-ring" ref={cursorRingRef} aria-hidden="true" />
       <header className="topbar">
         <div className="container topbar-inner">
           <a className="brand" href="#top" onClick={() => setMenuOpen(false)}><span className="brand-mark">R</span><span>RIZKI ARBI.</span></a>
