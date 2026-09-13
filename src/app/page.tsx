@@ -34,8 +34,8 @@ const skillGroups = [
 ];
 
 const experiences = [
-  { date: '2026 — SEKARANG', role: 'Pengembang Web', company: 'Website Katalog Digital “Berkah Mulia”', body: 'Membangun dan mendeploy katalog digital aktif, merancang kategori bertingkat, serta menjaga performa dan responsivitas di berbagai perangkat.' },
-  { date: '2025 — 2026', role: 'Pengembang Web & Peneliti', company: 'Platform E-Commerce “GEGARES”', body: 'Mengembangkan aplikasi e-commerce sebagai proyek Penulisan Ilmiah Universitas Gunadarma dengan arsitektur Laravel MVC dan database MySQL.' },
+  { date: '2026: SEKARANG', role: 'Pengembang Web', company: 'Website Katalog Digital “Berkah Mulia”', body: 'Membangun dan mendeploy katalog digital aktif, merancang kategori bertingkat, serta menjaga performa dan responsivitas di berbagai perangkat.' },
+  { date: '2025: 2026', role: 'Pengembang Web & Peneliti', company: 'Platform E-Commerce “GEGARES”', body: 'Mengembangkan aplikasi e-commerce sebagai proyek Penulisan Ilmiah Universitas Gunadarma dengan arsitektur Laravel MVC dan database MySQL.' },
 ];
 
 function Arrow() { return <span aria-hidden="true">↗</span>; }
@@ -66,31 +66,31 @@ export default function Home() {
               <h1>HALO, SAYA <span>RIZKI.</span></h1>
               <p className="hero-copy">Web Developer &amp; IT Support yang suka mengubah kebutuhan yang rumit menjadi sistem digital yang rapi, berguna, dan siap dipakai.</p>
               <div className="hero-actions">
-                <a className="button" href="#work">Lihat karya <Arrow /></a>
+                <a className="button" href="#work">Lihat karya</a>
                 <a className="button secondary" href="/cv-rizki-arbiansyah.pdf" target="_blank" rel="noreferrer">Lihat CV <Arrow /></a>
               </div>
               <p className="hero-note">Saat ini berbasis di <a href="https://maps.google.com/?q=Jakarta+Barat" target="_blank" rel="noreferrer">Jakarta Barat, Indonesia</a>.</p>
             </div>
             <div className="hero-card">
               <div className="photo-frame"><Image src="/images/profile-photo.png" alt="Rizki Arbiansyah" fill priority sizes="(max-width: 900px) 500px, 460px" /></div>
-              <div className="hero-card-footer"><div><strong>WEB DEV.</strong><small>IT SUPPORT. SYSTEM THINKER.</small></div><span className="scribble">✳</span></div>
+              <div className="hero-card-footer"><div><strong>WEB DEV.</strong><small>IT SUPPORT. SYSTEM THINKER.</small></div></div>
             </div>
           </div>
         </section>
 
-        <div className="ticker" aria-label="Bidang keahlian"><div className="ticker-track">{[1, 2].map((copy) => <div className="ticker-item" key={copy}><b>✦</b> WEB DEVELOPMENT <b>✦</b> SYSTEM DESIGN <b>✦</b> IT SUPPORT <b>✦</b> LET&apos;S BUILD SOMETHING USEFUL</div>)}</div></div>
+        <div className="ticker" aria-label="Bidang keahlian"><div className="ticker-track"><div className="ticker-item">WEB DEVELOPMENT <b>/</b> SYSTEM DESIGN <b>/</b> IT SUPPORT <b>/</b> LET&apos;S BUILD SOMETHING USEFUL</div></div></div>
 
         <section className="section" id="about">
           <div className="container">
             <div className="section-heading"><div><p className="section-kicker">01 / Sedikit tentang saya</p><h2>Bukan cuma<br />bikin <em>bagus.</em></h2></div><p className="section-intro">Saya percaya software yang baik harus mudah dipahami, mudah dirawat, dan benar-benar membantu orang yang memakainya.</p></div>
             <div className="about-grid">
-              <div><span className="about-sticker">CURIOUS<br />BY DEFAULT.</span><div className="quote">“The only way to do great work is to love what you do.”<cite>— Steve Jobs</cite></div></div>
+              <div><span className="about-sticker">CURIOUS<br />BY DEFAULT.</span><div className="quote">“The only way to do great work is to love what you do.”<cite>Steve Jobs</cite></div></div>
               <div className="about-copy"><p>Saya adalah lulusan S1 Sistem Informasi Universitas Gunadarma dengan IPK 3.58 / 4.00. Fokus saya ada di pengembangan web berbasis Laravel, MySQL, dan Tailwind CSS, sekaligus memastikan sisi teknis di baliknya berjalan baik.</p><p>Saya juga nyaman mengerjakan troubleshooting hardware/software, instalasi Windows/Linux, pemeliharaan PC &amp; printer, serta konektivitas dasar LAN/Wi-Fi. Buat saya, memahami konteks masalah sama pentingnya dengan menulis kodenya.</p></div>
             </div>
           </div>
         </section>
 
-        <section className="section" aria-label="Statistik"><div className="container stats-grid"><div className="card stat"><span className="stat-number">3.58</span><span className="stat-label">IPK S1 Sistem Informasi</span></div><div className="card stat"><span className="stat-number">07</span><span className="stat-label">Sertifikasi kompetensi &amp; jaringan</span></div><div className="card stat"><span className="stat-number">02</span><span className="stat-label">Proyek live yang dibangun</span></div><div className="card stat"><span className="stat-number">2026</span><span className="stat-label">Tahun lulus sarjana</span></div></div></section>
+        <section className="section" aria-label="Bukti dan capaian"><div className="container stats-grid"><a className="card stat" href="/cv-rizki-arbiansyah.pdf" target="_blank" rel="noreferrer" aria-label="Buka CV untuk melihat IPK"><span className="stat-number">3.58</span><span className="stat-label">IPK S1 Sistem Informasi · lihat CV</span></a><a className="card stat" href="/cv-rizki-arbiansyah.pdf" target="_blank" rel="noreferrer" aria-label="Buka CV untuk melihat sertifikasi"><span className="stat-number">08</span><span className="stat-label">Sertifikat &amp; pelatihan tercatat · lihat CV</span></a><a className="card stat" href="#work" aria-label="Lihat dua proyek live"><span className="stat-number">02</span><span className="stat-label">Proyek live yang ditampilkan di bawah</span></a><a className="card stat" href="/cv-rizki-arbiansyah.pdf" target="_blank" rel="noreferrer" aria-label="Buka CV untuk melihat tahun kelulusan"><span className="stat-number">2026</span><span className="stat-label">Tahun lulus sarjana · lihat CV</span></a></div></section>
 
         <section className="section" id="work"><div className="container"><div className="section-heading"><div><p className="section-kicker">02 / Selected work</p><h2>Yang sudah<br /><em>dibangun.</em></h2></div><p className="section-intro">Dua proyek yang menggabungkan analisis kebutuhan, implementasi, dan perhatian pada detail kecil.</p></div><div className="project-grid">{projects.map((project) => <article className="card project-card" key={project.title}><div className="project-image"><Image src={project.image} alt={`Screenshot ${project.title}`} fill sizes="(max-width: 640px) 100vw, 50vw" /><span className="project-index">{project.number}</span></div><div className="project-content"><span className="project-category">{project.category}</span><h3>{project.title}</h3><p>{project.description}</p><div className="tags">{project.tags.map((tag) => <span className="tag" key={tag}>{tag}</span>)}</div><div className="project-links"><a href={project.demo} target="_blank" rel="noreferrer">Live site <Arrow /></a><a href={project.github} target="_blank" rel="noreferrer">GitHub <Arrow /></a></div></div></article>)}</div></div></section>
 
